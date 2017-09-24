@@ -48,12 +48,12 @@ class Preprocessor:
 		return (Ftrain_pca,Ftest_pca)
 
 	def mutual_info_select(self,F,y,threshold):
-		mi = list(enumerate(mutual_info_classif(F,y)))
-		to_delete = []
+		mi = list(enumerate(sorted(mutual_info_classif(F,y))))
+		f_best = []
 		for (ind,rank) in mi:
-			if rank <= threshold:
-				to_delete.append(ind)
-		return np.delete(F, to_delete, 1)
+			if rank > threshold:
+				f_best.append(ind)
+		return f_best
 
 
 

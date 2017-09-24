@@ -69,13 +69,9 @@ if __name__ == '__main__':
 	Fglobal = np.array(Fglobal)
 	y = np.array(db.targets)
 
-	# eigenspectrum
+	# eigenspectrum over all data
 	es = Eigenspectrum(Fglobal)
 	es.show()
-	# setting preprocessing
-	pp = Preprocessor('standard',n_components=48)
-	# selecting features using mutual information
-	Fglobal = pp.mutual_info_select(Fglobal,y,0.0)
 
 	# evaluating SVM using cross validation
 	print "Evaluating model with cross validation..."
@@ -88,11 +84,16 @@ if __name__ == '__main__':
 		sss = StratifiedShuffleSplit(n_splits=k_folds, test_size=0.2, random_state=1)
 		splits = sss.split(Fglobal, y)
 
+	# setting preprocessing
+	pp = Preprocessor('standard',n_components=45)
 	n_classes = len(db.classes)
 	clf = OneVsRestClassifier(svm.SVC(kernel='rbf',C=10, gamma=0.01))
 	prfs = []; scores = []; acc = np.zeros(n_classes)
 	for (train,test) in splits:
+		# selecting features using mutual information
 		Ftrain = Fglobal[train]; Ftest = Fglobal[test]
+		f_subset = pp.mutual_info_select(Ftrain,y[train],0.0)
+		Ftrain = Ftrain[:,f_subset]; Ftest = Ftest[:,f_subset]
 		(Ftrain,Ftest) = pp.standardize(Ftrain,Ftest)
 		(Ftrain,Ftest) = pp.project_on_pc(Ftrain,Ftest)
 
