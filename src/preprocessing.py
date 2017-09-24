@@ -48,7 +48,7 @@ class Preprocessor:
 		return (Ftrain_pca,Ftest_pca)
 
 	def mutual_info_select(self,F,y,threshold):
-		mi = list(enumerate(sorted(mutual_info_classif(F,y))))
+		mi = list(enumerate(mutual_info_classif(F,y)))
 		f_best = []
 		for (ind,rank) in mi:
 			if rank > threshold:
