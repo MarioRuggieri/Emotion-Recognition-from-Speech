@@ -62,7 +62,7 @@ class Dataset:
 									f_video = f_video.replace(" ","\ ")		#for shell command
 									video_path = os.path.join(block_path,f_video)
 									audio_path = video_path.replace('.avi','.wav')	#output
-									if decode: 
+									if decode and get_data: 
 										sp.call("ffmpeg -i " + video_path + " -ab 160k -ac 1 -ar 44100 -vn " + audio_path, shell=True)
 									[Fs,x] = audioBasicIO.readAudioFile(audio_path.replace("\ "," "))
 									if get_data:
