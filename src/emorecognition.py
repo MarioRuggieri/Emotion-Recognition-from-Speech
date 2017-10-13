@@ -97,16 +97,8 @@ if __name__ == '__main__':
 		(Ftrain,Ftest) = pp.standardize(Ftrain,Ftest)
 		(Ftrain,Ftest) = pp.project_on_pc(Ftrain,Ftest)
 
-		# sum accuracies for each class in order to calculate the per class average accuracy
 		clf.fit(Ftrain, y[train])
 		ypred = clf.predict(Ftest)
-		for i in range(0,n_classes):
-			correct = 0
-			total = y[test].tolist().count(i)
-			for j in range(0,len(ypred)):
-				if (y[test][j] == i and ypred[j] == i):
-					correct = correct + 1
-			acc[i] = acc[i] + float(correct)/float(total)
 
 		#print clf.score(Ftest, y[test])
 		scores.append(clf.score(Ftest, y[test]))
@@ -115,11 +107,6 @@ if __name__ == '__main__':
 
 	# mean total accuracy
 	print("\nAccuracy =  %0.2f (%0.2f)\n" % (np.mean(scores), np.std(scores)))
-	# mean per class accuracy over folds 
-	acc = acc/k_folds
-	for i in range(0,n_classes):
-		print db.classes[i] + " accuracy = %0.2f" % acc[i]
-	print("")
 
 	#mean per class precision and recall 
 	mean_prec = np.zeros((1,n_classes))
