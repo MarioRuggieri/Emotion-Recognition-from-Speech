@@ -31,6 +31,7 @@ Long option | Option | Description
 --load_data | -l | load dataset data and info and save them into a .p file
 --extract_features | -e | extract features from data and save them into a .p file
 --speaker_indipendence | -s | cross validation is made using different actors for train and test sets
+--plot_eigenspectrum | -i | show eigenspectrum for each training set
 
 Example:
 
