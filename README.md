@@ -17,7 +17,7 @@ E-mail: mario.ruggieri@uniparthenope.it
 # Datasets
 
 - [Berlin Database of Emotional Speech](http://emodb.bilderbar.info/start.html) [1]
-- [DaFeX Dataset](https://i3.fbk.eu/resources/dafex-database-kinetic-facial-expressions) [2][3]
+- [DaFeX Dataset](https://i3.fbk.eu/resources/dafex-database-kinetic-facial-expressions) [2-3]
 
 Download Berlin DB from the link.
 Request DaFeX dataset following the link instructions. The code will generate automatically .wav files
